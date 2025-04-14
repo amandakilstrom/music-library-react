@@ -1,18 +1,21 @@
 // import logo from './logo.svg';
 // import './App.css';
 
+import { BrowserRouter } from 'react-router';
 import { Header } from './components/header';
 import { Footer } from './components/footer';
-import { Home } from './pages/home';
+import { AppRouter } from "./routes/approuter";
 
 function App() {
   return (
     <>
-      <Header/>
+      <BrowserRouter >
+      <Header />
 
-      <Home/>
+      <AppRouter />
 
-      <Footer/>
+      <Footer />
+      </BrowserRouter >
     </>
   );
 }

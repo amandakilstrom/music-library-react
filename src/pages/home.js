@@ -1,6 +1,6 @@
-import react from 'react';
+import React from 'react';
 
-export function Home() {
+export default function Home() {
     return (
         <div class="container px-4 py-4" id="home">
         <div class="bg-body-tertiary p-5 rounded">
