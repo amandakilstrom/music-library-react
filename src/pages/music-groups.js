@@ -22,8 +22,7 @@ export default function MusicGroups() {
             const data = await service.readMusicGroupsAsync(0, true, null, 10);
             setWapiData(data);
         })();
-    }
-        , []);
+    },[]);
 
     const onClick = async () => {
 
@@ -52,7 +51,7 @@ export default function MusicGroups() {
     }
 
     const onView = (musicGroupId) => {
-        navigate(`../pages/music-group-info`);
+        navigate(`/music-group/${musicGroupId}`);
     }
 
     return (
