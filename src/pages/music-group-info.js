@@ -1,7 +1,14 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
-export function MusicGroupInfoS() {
+import musicService from "../services/music-group-service";
+
+export default function MusicGroupInfo() {
+    
+    const { musicGroupId } = useParams();
+    console.log('musicGroupId:', musicGroupId);
+    
     return (
-        <h1>hej</h1>
+        <h1>hej </h1>
     )
 }
