@@ -6,23 +6,24 @@ import "../pages/music-group-info";
 
 export default function MusicGroups() {
 
+    const service = new musicService(`https://seido-webservice-307d89e1f16a.azurewebsites.net/api`);
+
+
     const [wapiData, setWapiData] = useState();
     const [pageNr, setPageNr] = useState(0);
+    const [searchInput, setSearchInput] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        //equvalent to componentDidMount
+
         console.log('useEffect run');
 
-        //package the async in an async iffy
-        //Immediately-Invoked Function Expressions (IIFE), pronounced "iffy"
-        //(async () => {})()
         (async () => {
             const service = new musicService(`https://seido-webservice-307d89e1f16a.azurewebsites.net/api`);
             const data = await service.readMusicGroupsAsync(0, true, null, 10);
             setWapiData(data);
         })();
-    },[]);
+    }, []);
 
     const onClick = async () => {
 
@@ -54,9 +55,44 @@ export default function MusicGroups() {
         navigate(`/music-group/${musicGroupId}`);
     }
 
+    const onSearch = async () => {
+
+        const searchWord = searchInput;
+
+        const data = await service.readMusicGroupsAsync(pageNr, true, searchWord);
+
+        if (data.dbItemsCount === 0) {
+            alert('No results found');
+            return;
+        }
+
+        setWapiData(data);
+        setPageNr(0);
+        console.log('Clicked search page in func component');
+    }
+
+    const onClear = async () => {
+
+        const data = await service.readMusicGroupsAsync(pageNr, true, null);
+
+        setWapiData(data);
+        setSearchInput("");
+        setPageNr(0);
+
+        console.log('Clicked clear page in func component');
+    }
+
     return (
         <div class="container px-4 py-4 text.start">
             <h1 class="pb-2 border-bottom">Music Groups </h1>
+
+            <form>
+                <input id='search' placeholder="search" value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)} />
+                <button onClick={onSearch} type="button">Search</button>
+                <button onClick={onClear} type="button">Clear</button>
+            </form>
+
             <p>There were {wapiData?.dbItemsCount} Music Groups found</p>
             <div className="row mb-1 text-center">
                 <div className="col-md-2 themed-grid-head-col">Band Name</div>

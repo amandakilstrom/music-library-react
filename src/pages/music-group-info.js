@@ -7,8 +7,12 @@ export default function MusicGroupInfo() {
 
     const [data, setData] = useState({});
 
+    if (musicGroupId === undefined) {
+        console.log('MusicGroupId is undefined');
+    }
+
     useEffect(() => {
-        //equvalent to componentDidMount
+
         console.log('useEffect run');
 
         (async () => {
@@ -20,31 +24,40 @@ export default function MusicGroupInfo() {
 
     return (
         <>
-            <h1>Music Group Info</h1>
+            <div className="container px-4 py-4 text.start">
+                <h1 className="pb-2 border-bottom">Music Group Info</h1>
 
-            <p>{data.name}</p>
+                <div className="text-center">
+                <div className="col-md-2 themed-grid-head-col">Band Name</div>
+                <p className="col-md-2 themed-grid-col">{data.name}</p>
 
-            <p>{data.establishedYear}</p>
+                <div className="col-md-2 themed-grid-head-col">Established Year</div>
+                <p className="col-md-2 themed-grid-col">{data.establishedYear}</p>
 
-            <p>{data.genre}</p>
+                <div className="col-md-2 themed-grid-head-col">Genre</div>
+                <p className="col-md-2 themed-grid-col">{data.genre}</p>
 
-            {data.albums ? (
-                <ul>
-                    {data.albums.map((a, index) => (<li key={index}>{a.name}</li>))}
-                </ul>
-            ) : (
-                <p>No albums found</p>
-            )}
+                <div className="col-md-5 themed-grid-head-col">Albums</div>
+                {data.albums ? (
+                    <ul className="col-md-5 themed-grid-col list-unstyled">
+                        {data.albums.map((a, index) => (<li key={index}>{a.name}</li>))}
+                    </ul>
+                ) : (
+                    <p className="col-md-5 themed-grid-col">No albums found</p>
+                )}
 
-            {data.artists ? (
-                <ul>
-                    {data.artists.map((m, index) => (
-                        <li key={index}>{m.firstName} {m.lastName}</li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No members found</p>
-            )}
+                <div className="col-md-5 themed-grid-head-col">Members</div>
+                {data.artists ? (
+                    <ul className="col-md-5 themed-grid-col list-unstyled">
+                        {data.artists.map((m, index) => (
+                            <li key={index}>{m.firstName} {m.lastName}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="col-md-5 themed-grid-col">No members found</p>
+                )}
+                </div>
+            </div>
         </>
     )
 }

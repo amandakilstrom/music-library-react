@@ -9,7 +9,7 @@ export function AppRouter() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/music-groups" element={<MusicGroups />} /> 
+            <Route path="/music-groups" element={<MusicGroups />} />
             <Route path="/music-group/:musicGroupId" element={<MusicGroupInfo />} />
         </Routes>
     )
