@@ -1,3 +1,12 @@
+This is my first project with react. It was for a school project
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
